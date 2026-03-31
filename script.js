@@ -1,4 +1,4 @@
-// Language Switcher Logic
+
 function toggleLanguage() {
     const langBtn = document.getElementById('lang-text');
     const isEnglish = langBtn.innerText === "EN";
@@ -7,14 +7,17 @@ function toggleLanguage() {
 
     langBtn.innerText = nextLang;
 
-    // Change all text based on data attributes
+    // Use innerHTML instead of innerText to keep the <span> and <br> tags
     document.querySelectorAll('[data-en]').forEach(el => {
-        el.innerText = el.getAttribute(`data-${dataLang}`);
+        const translation = el.getAttribute(`data-${dataLang}`);
+        if (translation) {
+            el.innerHTML = translation;
+        }
     });
 
-    // Store preference
     localStorage.setItem('userLanguage', isEnglish ? "中文" : "EN");
 }
+
 
 // Initialization & Persistence
 document.addEventListener('DOMContentLoaded', () => {

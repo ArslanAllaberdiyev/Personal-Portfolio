@@ -2,7 +2,7 @@
   --bg-black: #000000;
   --bg-white: #ffffff;
   --glass: rgba(10, 10, 10, 0.57);
-  --text-dim: #888;
+  --text-dim: #6E6E6E;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
@@ -19,7 +19,7 @@ body { background: var(--bg-black); color: white; overflow-x: hidden; line-heigh
   border-radius: 100px; border: 1px solid rgba(255,255,255,0.1);
   display: flex; align-items: center; justify-content: center;
 }
-.nav-links { display: flex; gap: clamp(10px, 3vw, 30px); }
+.nav-links { display: flex; gap: clamp(10px, 3vw, 30px); align-items: center;}
 .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
 .nav-links a:hover, .nav-links a.active { color: #fff; }
 
@@ -35,8 +35,8 @@ body { background: var(--bg-black); color: white; overflow-x: hidden; line-heigh
   background: var(--bg-white); 
   background: linear-gradient(#FFFFFF, #FFFFFF);
   color: #000; padding: 80px 5%;
-  box-shadow: 0 -40px 120px rgba(255, 255, 255, 1);
   min-height: 100vh; position: relative; z-index: 5;
+  box-shadow: 0 -40px 120px rgba(255, 255, 255, 1);
 }
 .bento-grid {
   display: grid; 
@@ -65,7 +65,7 @@ body { background: var(--bg-black); color: white; overflow-x: hidden; line-heigh
   box-shadow: 0 0 100px rgba(255,255,255,0.4); z-index: 1; top: 20%;
 }
 .about-container {
-  z-index: 2; color: #000; display: flex; flex-direction: row; 
+  z-index: 2; color: #000; display: flex; flex-direction: column; 
   gap: 30px; width: 100%; max-width: 1100px;
 }
 .profile-card { flex: 1; background: #fff; padding: 0px; border-radius: 35px; text-align: center; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
@@ -84,22 +84,74 @@ color: #292929;}
 }
 
 /* --- 5. WHY ME (SCROLLABLE) --- */
-.why-me-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-.why-me-section h2 { font-size: 3rem; margin-bottom: 30px; letter-spacing: -2px; color: #fff; }
-.outer-box {
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-  padding: clamp(20px, 5vw, 50px); border-radius: 40px;
-}
-.scroll-container {
-  display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
-  scroll-snap-type: x mandatory; scrollbar-width: none;
-}
-.reason-box {
-  min-width: 280px; flex: 1; scroll-snap-align: start;
-  background: transparent; color: #FFFBFB; padding: 40px; border-radius: 25px;
-  border: 1px solid #fff;
+.why-me-section {
+  padding: 100px 5%;
+  max-width: 1400px; 
+  margin: 0 auto; 
 }
 
+.why-me-section h2 { 
+  font-size: 3rem;
+  margin-bottom: 30px;
+  letter-spacing: -2px; 
+  color: #fff;
+}
+
+.outer-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(20px, 5vw, 50px); 
+  border-radius: 40px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.scroll-container {
+  display: flex; 
+  flex-direction: column;
+  gap: 20px; 
+  overflow-y: auto;
+  scroll-snap-type: y mandatory; 
+  height: 100%;
+  padding-right: 15px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+.reason-box {
+  width: 100%; 
+  min-height: 170px;
+  scroll-snap-align: start;
+  background: transparent;
+  color: #FFFFFF; 
+  padding: 40px;
+  border-radius: 25px;
+  border: 1px solid #fff;
+  transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1); 
+}
+
+.reason-box:hover { 
+  border-color: #fff; 
+  background: rgba(255,255,255,0.05); 
+  transform: scale(0.99); /* Slight "press" effect */
+}
+
+.reason-box h4 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.reason-box p {
+  color: #888;
+  line-height: 1.6;
+}
 /* --- 6. FOOTER --- */
 .final-cta { padding: 15vh 0; text-align: center; }
 .big-text { font-size: clamp(3rem, 12vw, 9rem); line-height: 0.9; letter-spacing: -5px; }
@@ -108,7 +160,7 @@ color: #292929;}
 /* --- MOBILE RESPONSIVENESS (IPHONE/ANDROID) --- */
 @media (max-width: 850px) {
   .bento-grid { grid-template-columns: 1fr; }
-  .w-60, .w-40, .w-100 { grid-column: span 1; }
+  .w-60, .w-40, .w-50, .w-100 { grid-column: span 1; }
   .h-2 { grid-row: span 1; }
   
   .about-container { flex-direction: column; }
@@ -156,6 +208,7 @@ color: #292929;}
   padding: 2px 6px;
   border-radius: 4px;
   margin-bottom: 15px;
+  display: inline-block;
 }
 
 .tech-stack { display: flex; gap: 10px; margin: 15px 0; }
@@ -198,8 +251,9 @@ color: #292929;}
   font-size: 11px;
   letter-spacing: 1px;
   width: fit-content;
-  margin-top: auto;
+  margin-top: 10px;
   transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block;
 }
 
 .p-btn:hover {
@@ -402,6 +456,8 @@ color: #292929;}
 .student-id-card {
   background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05)) !important;
   border: 1px dashed rgba(255,255,255,0.1) !important;
+  display: flex;
+  justify-content: center;
 }
 
 #id-display {
