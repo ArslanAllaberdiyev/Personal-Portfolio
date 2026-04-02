@@ -45,7 +45,7 @@
       <div class="goal-card">
         <span class="p-status" data-en="NEXT" data-cn="下一步">NEXT</span>
         <h3 data-en="Degree Enrollment" data-cn="学位入学">Degree Enrollment</h3>
-        <p data-en="Successfully enrolling in UESTC’s Software Engineering program with a full academic award. Committed to high-performance learning and technical leadership within the university." data-cn="成功考入电子科技大学软件工程专业，并获得全额奖学金。致力于在校内进行高效学习并发挥技术领导作用。">Successfully enrolling in UESTC’s Software Engineering program with a full scholarship award. Committed to high-performance learning and technical leadership within the university.</p>
+        <p data-en="Successfully enrolling in <span class='dynamic-uni'>UESTC</span>’s Software Engineering program with a full academic award. Committed to high-performance learning and technical leadership within the university." data-cn="成功考入<span class='dynamic-uni'>电子科技大学</span>软件工程专业，并获得全额奖学金。致力于在校内进行高效学习并发挥技术领导作用。">Successfully enrolling in <span class="dynamic-uni">UESTC</span>’s Software Engineering program with a full scholarship award. Committed to high-performance learning and technical leadership within the university.</p>
       </div>
     </div>
     <div class="timeline-item left">
@@ -58,9 +58,9 @@
         Professional Developer
     </h3>
     
-    <p data-en="Transitioning from high-level development to elite systems architecture by engineering low-latency frameworks and defining next-generation technical standards during my four-year tenure at UESTC." 
-       data-cn="在电子科技大学四年的任期内，通过工程化低延迟框架并定义下一代技术标准，从高级开发向精英系统架构转型。">
-       Transitioning from high-level development to elite systems architecture by engineering low-latency frameworks and defining next-generation technical standards.
+    <p data-en="Transitioning from high-level development to elite systems architecture by engineering low-latency frameworks and defining next-generation technical standards during my four-year tenure at <span class='dynamic-uni'>UESTC</span>" 
+       data-cn="通过工程低延迟框架从高级开发到精英系统架构的转变，并在我在<span class='dynamic-uni'>电子科技大学</span>的四年任期内定义下一代技术标准。">
+       Transitioning from high-level development to elite systems architecture by engineering low-latency frameworks and defining next-generation technical standards during my four-year tenure at <span class="dynamic-uni">UESTC</span>.
     </p>
   </div>
 </div>
@@ -80,5 +80,44 @@
   </footer>
 
   <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const uniKey = urlParams.get('ref');
+
+    // Your personalized database
+    const uniDatabase = {
+        'uestc': { en: 'UESTC', cn: '电子科技大学' },
+        'tsinghua': { en: 'Tsinghua University', cn: '清华大学' },
+        'sjtu': { en: 'Shanghai Jiao Tong University', cn: '上海交通大学' },
+        'zju': { en: 'Zhejiang University', cn: '浙江大学' },
+        'xidian': { en: 'Xidian University', cn: '西安电子科技大学'},
+        'dut': { en: 'Dalian University of Technology', cn: '大连理工大学'}
+    };
+
+    if (uniKey && uniDatabase[uniKey]) {
+        const selected = uniDatabase[uniKey];
+        const elements = document.querySelectorAll('.dynamic-uni');
+
+        elements.forEach(el => {
+            // 1. Update the visible text
+            const isChinese = document.documentElement.lang === 'zh' || document.body.classList.contains('zh-mode');
+            el.innerText = isChinese ? selected.cn : selected.en;
+
+            // 2. Update the parent attributes so the language switcher works
+            const parent = el.closest('[data-en]');
+            if (parent) {
+                const oldEn = parent.getAttribute('data-en');
+                const oldCn = parent.getAttribute('data-cn');
+                
+                // Replace any previous university name with the new one
+                parent.setAttribute('data-en', oldEn.replace(/UESTC|Tsinghua University|Shanghai Jiao Tong University|Zhejiang University|Xidian University|Dalian University of Technology /g, selected.en));
+                parent.setAttribute('data-cn', oldCn.replace(/电子科技大学|清华大学|上海交通大学|浙江大学|西安电子科技大学|大连理工大学/g, selected.cn));
+            }
+        });
+    }
+});
+</script>
+
 </body>
 </html>
