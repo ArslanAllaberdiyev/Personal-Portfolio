@@ -45,7 +45,7 @@
       <div class="goal-card">
         <span class="p-status" data-en="NEXT" data-cn="下一步">NEXT</span>
         <h3 data-en="Degree Enrollment" data-cn="学位入学">Degree Enrollment</h3>
-        <p data-en="Successfully enrolling in <span class='dynamic-uni'>UESTC</span>’s Software Engineering program with a full academic award. Committed to high-performance learning and technical leadership within the university." data-cn="成功考入<span class='dynamic-uni'>电子科技大学</span>软件工程专业，并获得全额奖学金。致力于在校内进行高效学习并发挥技术领导作用。">Successfully enrolling in <span class="dynamic-uni">UESTC</span>’s Software Engineering program with a full scholarship award. Committed to high-performance learning and technical leadership within the university.</p>
+        <p data-en="Successfully enrolling in the <span class='dynamic-uni'>UESTC</span>’s Software Engineering program with a full academic award. Committed to high-performance learning and technical leadership within the university." data-cn="成功考入<span class='dynamic-uni'>电子科技大学</span>软件工程专业，并获得全额奖学金。致力于在校内进行高效学习并发挥技术领导作用。">Successfully enrolling in the <span class="dynamic-uni">UESTC</span>’s Software Engineering program with a full scholarship award. Committed to high-performance learning and technical leadership within the university.</p>
       </div>
     </div>
     <div class="timeline-item left">
@@ -80,6 +80,7 @@
   </footer>
 
   <script src="script.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -92,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'sjtu': { en: 'Shanghai Jiao Tong University', cn: '上海交通大学' },
         'zju': { en: 'Zhejiang University', cn: '浙江大学' },
         'xidian': { en: 'Xidian University', cn: '西安电子科技大学'},
-        'dut': { en: 'Dalian University of Technology', cn: '大连理工大学'}
+        'dut': { en: 'Dalian University of Technology', cn: '大连理工大学'},
+        'scut': { en: 'South China University of Technology', cn: '华南理工大学'}
     };
 
     if (uniKey && uniDatabase[uniKey]) {
@@ -111,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const oldCn = parent.getAttribute('data-cn');
                 
                 // Replace any previous university name with the new one
-                parent.setAttribute('data-en', oldEn.replace(/UESTC|Tsinghua University|Shanghai Jiao Tong University|Zhejiang University|Xidian University|Dalian University of Technology /g, selected.en));
-                parent.setAttribute('data-cn', oldCn.replace(/电子科技大学|清华大学|上海交通大学|浙江大学|西安电子科技大学|大连理工大学/g, selected.cn));
+                parent.setAttribute('data-en', oldEn.replace(/UESTC|Tsinghua University|Shanghai Jiao Tong University|Zhejiang University|Xidian University|South China University of Technology|Dalian University of Technology /g, selected.en));
+                parent.setAttribute('data-cn', oldCn.replace(/电子科技大学|清华大学|上海交通大学|浙江大学|华南理工大学|西安电子科技大学|大连理工大学/g, selected.cn));
             }
         });
     }
