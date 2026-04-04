@@ -81,45 +81,5 @@
 
   <script src="script.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const uniKey = urlParams.get('ref');
-
-    // Your personalized database
-    const uniDatabase = {
-        'uestc': { en: 'UESTC', cn: '电子科技大学' },
-        'tsinghua': { en: 'Tsinghua University', cn: '清华大学' },
-        'sjtu': { en: 'Shanghai Jiao Tong University', cn: '上海交通大学' },
-        'zju': { en: 'Zhejiang University', cn: '浙江大学' },
-        'xidian': { en: 'Xidian University', cn: '西安电子科技大学'},
-        'dut': { en: 'Dalian University of Technology', cn: '大连理工大学'},
-        'scut': { en: 'South China University of Technology', cn: '华南理工大学'}
-    };
-
-    if (uniKey && uniDatabase[uniKey]) {
-        const selected = uniDatabase[uniKey];
-        const elements = document.querySelectorAll('.dynamic-uni');
-
-        elements.forEach(el => {
-            // 1. Update the visible text
-            const isChinese = document.documentElement.lang === 'zh' || document.body.classList.contains('zh-mode');
-            el.innerText = isChinese ? selected.cn : selected.en;
-
-            // 2. Update the parent attributes so the language switcher works
-            const parent = el.closest('[data-en]');
-            if (parent) {
-                const oldEn = parent.getAttribute('data-en');
-                const oldCn = parent.getAttribute('data-cn');
-                
-                // Replace any previous university name with the new one
-                parent.setAttribute('data-en', oldEn.replace(/UESTC|Tsinghua University|Shanghai Jiao Tong University|Zhejiang University|Xidian University|South China University of Technology|Dalian University of Technology /g, selected.en));
-                parent.setAttribute('data-cn', oldCn.replace(/电子科技大学|清华大学|上海交通大学|浙江大学|华南理工大学|西安电子科技大学|大连理工大学/g, selected.cn));
-            }
-        });
-    }
-});
-</script>
-
 </body>
 </html>
